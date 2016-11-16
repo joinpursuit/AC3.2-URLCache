@@ -8,16 +8,17 @@
 
 import Foundation
 
-class APIRequestManager: NSObject, NSURLConnectionDataDelegate {
+class APIRequestManager {
     
     static let manager = APIRequestManager()
-    private override init() {}
+    private init() {}
     
     func getData(endPoint: String, callback: @escaping (Data?) -> Void) {
         guard let myURL = URL(string: endPoint) else { return }
         let session = URLSession(configuration: URLSessionConfiguration.default)
         var request = URLRequest(url: myURL)
         request.cachePolicy = .useProtocolCachePolicy // fiddle with this to change behavior
+        
         
         if let cachedResponse = URLCache.shared.cachedResponse(for: request)?.response as? HTTPURLResponse {
             print("URL \(myURL) FOUND IN CACHE")
@@ -28,8 +29,8 @@ class APIRequestManager: NSObject, NSURLConnectionDataDelegate {
             if let lastModified = cachedResponse.allHeaderFields["Last-Modified"] as? String {
                 print("Last-Modified: \(lastModified)")
                 
-                let bogusTimestamp = "Fri, 1 Jan 2016 09:58:28 GMT"
-                request.setValue(bogusTimestamp, forHTTPHeaderField: "If-Modified-Since")
+                //let bogusTimestamp = "Fri, 1 Jan 2016 09:58:28 GMT"
+                request.setValue(lastModified, forHTTPHeaderField: "If-Modified-Since")
             }
         }
 
@@ -38,12 +39,11 @@ class APIRequestManager: NSObject, NSURLConnectionDataDelegate {
                 print("Error durring session: \(error)")
             }
             guard let validData = data else { return }
+            
+            print("Cache on disk: \(URLCache.shared.currentDiskUsage) of \(URLCache.shared.diskCapacity)")
+            print("Cache in memory: \(URLCache.shared.currentMemoryUsage) of \(URLCache.shared.memoryCapacity)")
+
             callback(validData)
             }.resume()
-    }
-    
-    // MARK: NSURLConnectionDelegate
-    func connection(_ connection: NSURLConnection, willCacheResponse cachedResponse: CachedURLResponse) -> CachedURLResponse? {
-        return nil
     }
 }
