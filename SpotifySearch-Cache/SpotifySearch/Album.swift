@@ -1,4 +1,4 @@
-//
+    //
 //  Album.swift
 //  SpotifySearch
 //
@@ -24,7 +24,7 @@ class Album {
     
     convenience init?(from dictionary: [String:AnyObject]) throws {
         if let name = dictionary["name"] as? String,
-            let images = dictionary["images"] as? [[String:AnyObject]] {
+            let images = dictionary["image"] as? [[String:AnyObject]] {
             var imageArr = [Image]()
             for im in images {
                 if let imageObj = Image(from: im) {
@@ -48,17 +48,20 @@ class Album {
             let jsonData: Any = try JSONSerialization.jsonObject(with: data, options: [])
             
             guard let response: [String : AnyObject] = jsonData as? [String : AnyObject],
-                let albums = response["albums"] as? [String: AnyObject],
-                let items = albums["items"] as? [[String: AnyObject]] else {
-                    throw AlbumModelParseError.results(json: jsonData)
+                let items = response["topalbums"] as? [String: AnyObject],
+                let albums = items["album"] as? [[String:AnyObject]] else {
+                   throw AlbumModelParseError.results(json: jsonData)
             }
             
-            for albumDict in items {
+            print(albums)
+            
+            for albumDict in albums {
                 if let album = try Album(from: albumDict) {
                     albumsToReturn?.append(album)
                 }
             }
         }
+       
         catch let AlbumModelParseError.results(json: json)  {
             print("Error encountered with parsing 'album' or 'items' key for object: \(json)")
         }
@@ -68,7 +71,6 @@ class Album {
         catch {
             print("Unknown parsing error")
         }
-        
         return albumsToReturn
     }
 }

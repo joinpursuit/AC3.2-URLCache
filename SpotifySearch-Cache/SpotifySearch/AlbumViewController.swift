@@ -37,5 +37,4 @@ class AlbumViewController: UIViewController {
             }
         }
     }
-
 }

@@ -9,17 +9,14 @@
 import Foundation
 
 class Image {
-    let height: Int
-    let width: Int
     let url: URL
+    let size: String
     
     init?(from dictionary: [String:AnyObject]) {
-        if let height = dictionary["height"] as? Int,
-            let width = dictionary["width"] as? Int,
-            let url = dictionary["url"] as? String,
+        if let size = dictionary["size"] as? String,
+            let url = dictionary["#text"] as? String,
             let validURL = URL(string: url) {
-            self.height = height
-            self.width = width
+            self.size = size
             self.url = validURL
         }
         else {
