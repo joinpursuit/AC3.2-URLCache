@@ -21,6 +21,7 @@ class AlbumsTableViewController: UITableViewController {
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        printCacheStats()
         
         self.title = searchTerm
         
@@ -54,6 +55,11 @@ class AlbumsTableViewController: UITableViewController {
         
         guard let url = urlComponents.url else { return nil }
         return url
+    }
+    
+    func printCacheStats() {
+        print("Cache on disk: \(URLCache.shared.currentDiskUsage) of \(URLCache.shared.diskCapacity)")
+        print("Cache in memory: \(URLCache.shared.currentMemoryUsage) of \(URLCache.shared.memoryCapacity)")
     }
     
     // MARK: - Table view data source
