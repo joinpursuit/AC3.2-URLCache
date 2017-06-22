@@ -113,7 +113,7 @@ at a hackathon or both.
 
 ---
 
-## Exercise
+### 4. Exercises
 
 1. Using Postman, let's go through previous API projects and look for ```Cache-Control``` and
  ```Last-Modified``` headers in JSON and image requests. Put the results in [this spreadsheet](https://docs.google.com/spreadsheets/d/1Na7V3h6LFg-n4HWyp7JzGTiCnrQu1cQ15-8ebgz-rUA/edit#gid=0).
