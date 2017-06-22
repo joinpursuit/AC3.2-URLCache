@@ -14,30 +14,15 @@ To understand how the use of URLCache can improve the performance and efficiency
 
 #### Vocabulary
 
-1. **HTTP** - *HyperText Transfer Protocol. HTTP is the underlying protocol used by the World Wide Web and this protocol defines how messages are formatted and transmitted, and what actions Web servers and browsers should take in response to various commands.*
+1. **HTTP Status Codes** (i.e. 200, 404) - *the first line of the HTTP response; includes a numeric status code (such as "404") and a textual reason phrase (such as "Not Found")*
 
->For example, when you enter a URL in your browser, this actually sends an HTTP command to the Web server directing it to fetch and transmit the requested Web page. The other main standard that controls how the World Wide Web works is HTML, which covers how Web pages are formatted and displayed.
+2. **Cache** - *stores data so future requests for that data can be served faster.*
 
-2. **HTTP Status Codes** (i.e. 200, 404) - *In HTTP/1.0 and since, the first line of the HTTP response is called the status line and includes a numeric status code (such as "404") and a textual reason phrase (such as "Not Found")*
+3. **Client** - *an application that runs on a personal computer or workstation and relies on a server to perform some operations.*
 
-> HTTP status code is primarily divided into five groups for better explanation of request and responses between client and server as named:
->  * Informational 1XX
->  * Successful 2XX
->  * Redirection 3XX
->  * Client Error 4XX
->  * Server Error 5XX
+4. **Server** - *A web server is a computer system that processes requests via HTTP. The term can refer to the entire system, or specifically to the software that accepts and supervises the HTTP requests.*
 
-3. **Cache** - *A hardware or software component that stores data so future requests for that data can be served faster. The data stored in a cache might be the result of an earlier computation, or the duplicate of data stored elsewhere*
-
-4. **Client** - *The client side of a client-server architecture. Typically, a client is an application that runs on a personal computer or workstation and relies on a server to perform some operations. The communication between client and server takes place using the Hypertext Transfer Protocol (HTTP)*
-
->In the real world, businesses have clients. In the computer world, servers have clients. The "client-server" architecture is common in both local and wide area networks. For example, if an office has a server that stores the company's database on it, the other computers in the office that can access the datbase are "clients" of the server.
->
->On a larger scale, when you access your e-mail from a mail server on the Internet, your computer acts as the client that connects to the mail server. The term "client software" is used to refer to the software that acts as the interface between the client computer and the server. For example, if you use Microsoft Outlook to check your e-mail, Outlook is your "e-mail client software" that allows you to send and receive messages from the server.
-
-5. **Server** - *A web server is a computer system that processes requests via HTTP, the basic network protocol used to distribute information on the World Wide Web. The term can refer to the entire system, or specifically to the software that accepts and supervises the HTTP requests.*
-
-6. **Header** - *HTTP headers are the code that transfers data between a Web server and a browser. That data is in the form of a text record that a user's browser sends to a Web server containing the details of what the browser wants and will accept back from the server. The request header also contains the type, version and capabilities of the browser that is making the request so that server returns compatible data. Upon receipt of the request header, the server will return an HTTP response header to the client that is attached to the file(s) being sent.*
+5. **Header** - *HTTP headers are the code that transfers data between a Web server and a browser.*
 ---
 
 ### 1. Why Caching?
@@ -134,4 +119,3 @@ at a hackathon or both.
  ```Last-Modified``` headers in JSON and image requests. Put the results in [this spreadsheet](https://docs.google.com/spreadsheets/d/1Na7V3h6LFg-n4HWyp7JzGTiCnrQu1cQ15-8ebgz-rUA/edit#gid=0).
 
 2. Experiment with changing the caching behavior within the app.
-
